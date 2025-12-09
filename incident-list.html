@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS Incidents - Incident Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>EMS Incidents</h1>
+        <div class="header-actions">
+            <button id="logoutButton" class="btn btn-secondary btn-small">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-field">
+                <label for="dateFilter" class="form-label">Filter by Date</label>
+                <input
+                    type="date"
+                    id="dateFilter"
+                    class="form-input"
+                    placeholder="Select date"
+                >
+            </div>
+
+            <div class="filter-field">
+                <label for="incidentNumberFilter" class="form-label">Incident Number</label>
+                <input
+                    type="number"
+                    id="incidentNumberFilter"
+                    class="form-input"
+                    placeholder="Enter incident number"
+                >
+            </div>
+
+            <div class="filter-actions">
+                <button id="searchButton" class="btn btn-primary btn-small">Search</button>
+                <button id="clearButton" class="btn btn-secondary btn-small">Clear</button>
+            </div>
+        </div>
+
+        <!-- Incidents Table -->
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Incident Number</th>
+                        <th>Unit ID</th>
+                        <th>Date/Time</th>
+                        <th>Address</th>
+                        <th>Incident Type</th>
+                    </tr>
+                </thead>
+                <tbody id="incidentsTableBody">
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prevButton" class="page-btn" disabled>
+                &laquo; Previous
+            </button>
+
+            <div class="page-numbers" id="pageNumbers">
+                <!-- Page numbers will be dynamically inserted here -->
+            </div>
+
+            <button id="nextButton" class="page-btn" disabled>
+                Next &raquo;
+            </button>
+        </div>
+
+        <div class="pagination-info" id="paginationInfo">
+            Loading...
+        </div>
+    </div>
+
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- App Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/incident-list.js"></script>
+</body>
+</html>

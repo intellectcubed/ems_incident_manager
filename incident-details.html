@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Details - EMS Incident Manager</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="details-container">
+        <a href="incident-list.html" class="back-button">
+            &larr; Incidents
+        </a>
+
+        <div class="details-header">
+            <h1 id="incidentTitle">Incident #<span id="incidentNumber">Loading...</span></h1>
+        </div>
+
+        <!-- Summary Box -->
+        <div class="summary-box">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <span class="summary-label">Unit ID</span>
+                    <span class="summary-value" id="unitId">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Address</span>
+                    <span class="summary-value" id="address">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Incident Type</span>
+                    <span class="summary-value" id="incidentType">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2>Incident Timeline</h2>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Date/Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timelineTableBody">
+                        <!-- Timeline rows will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Select Button -->
+        <div class="select-section">
+            <button id="selectButton" class="btn btn-blue">
+                Select This Incident
+            </button>
+        </div>
+    </div>
+
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- App Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/supabase-client.js"></script>
+    <script src="js/incident-details.js"></script>
+</body>
+</html>
