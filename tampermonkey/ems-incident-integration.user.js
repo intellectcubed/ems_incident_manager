@@ -4,8 +4,10 @@
 // @version      1.0
 // @description  Integrates EMS Incident Manager with ImageTrend Elite for incident data transfer
 // @author       Martinsville Rescue Squad
-// @match        https://*.github.io/mrs_incident_manager/*
+// @match        https://intellectcubed.github.io/ems_incident_manager/*
 // @match        https://newjersey.imagetrendelite.com/Elite/Organizationnewjersey/*
+// @updateURL    https://raw.githubusercontent.com/intellectcubed/ems_incident_manager/main/tampermonkey/ems-incident-integration.user.js
+// @downloadURL  https://raw.githubusercontent.com/intellectcubed/ems_incident_manager/main/tampermonkey/ems-incident-integration.user.js
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_setValue
 // @grant        GM_getValue
