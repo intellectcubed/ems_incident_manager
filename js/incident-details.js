@@ -171,13 +171,13 @@ function setupSelectButton() {
 
         try {
             // Check if Tampermonkey GM_setValue is available
-            if (typeof GM_setValue === 'undefined') {
+            if (typeof window.GM_setValue === 'undefined') {
                 alert('Tampermonkey is not detected. Please install the Tampermonkey userscript first.');
                 return;
             }
 
             // Save the incident content JSON to Tampermonkey storage
-            GM_setValue('incident_json', currentIncident.content);
+            window.GM_setValue('incident_json', currentIncident.content);
 
             // Navigate to the target URL
             window.location.href = 'https://newjersey.imagetrendelite.com/Elite/Organizationnewjersey/';

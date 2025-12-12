@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EMS Incident Manager Integration
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Integrates EMS Incident Manager with ImageTrend Elite for incident data transfer
 // @author       Martinsville Rescue Squad
 // @match        https://intellectcubed.github.io/ems_incident_manager/*
@@ -34,7 +34,7 @@
     const currentUrl = window.location.href;
 
     // Check if we're on the EMS Incident Manager pages
-    if (currentUrl.includes('github.io/mrs_incident_manager')) {
+    if (currentUrl.includes('github.io/ems_incident_manager')) {
         console.log('[EMS Incident Manager] Tampermonkey script loaded');
 
         // Expose GM_setValue and GM_getValue to the page context
@@ -61,9 +61,6 @@
 
                 // Store in unsafeWindow for potential use by other scripts or console access
                 unsafeWindow.EMSIncidentData = incidentData;
-
-                // Display notification to user
-                displayNotification('Incident data loaded from EMS Incident Manager');
 
                 // TODO: Add auto-fill logic here if needed
                 // This is where you would implement form auto-fill based on the incident data
