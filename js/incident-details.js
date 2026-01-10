@@ -29,9 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load incident details
     await loadIncidentDetails(incident_number, unit_id);
-
-    // Set up select button
-    setupSelectButton();
 });
 
 /**
@@ -157,34 +154,3 @@ function parseDateTimeForSort(dateStr, timeStr) {
     return new Date(year, month - 1, day, hours, minutes, seconds);
 }
 
-/**
- * Set up the select button event listener
- */
-function setupSelectButton() {
-    const selectButton = document.getElementById('selectButton');
-
-    selectButton.addEventListener('click', () => {
-        if (!currentIncident) {
-            alert('No incident data available.');
-            return;
-        }
-
-        try {
-            // Check if Tampermonkey GM_setValue is available
-            if (typeof window.GM_setValue === 'undefined') {
-                alert('Tampermonkey is not detected. Please install the Tampermonkey userscript first.');
-                return;
-            }
-
-            // Save the incident content JSON to Tampermonkey storage
-            window.GM_setValue('incident_json', currentIncident.content);
-
-            // Navigate to the target URL
-            window.location.href = 'https://newjersey.imagetrendelite.com/Elite/Organizationnewjersey/';
-
-        } catch (error) {
-            console.error('Error saving incident:', error);
-            alert('Failed to save incident data. Please make sure Tampermonkey is installed and enabled.');
-        }
-    });
-}

@@ -3,7 +3,7 @@ Create a clean, modern static web app with three frames: a login screen, an inci
 
 ## Pages:
 
-### Login: 
+### Login:
 prototype image: /Users/george.nowakowski/Projects/webpages/mrs_incident_manager/ai/screenshots/login.png
 - A small panel with authentication fields and a login button.
 User
@@ -36,3 +36,10 @@ prototype: /Users/george.nowakowski/Projects/webpages/mrs_incident_manager/ai/sc
 - Panel with title:  Status History
 	- table with columns: [DATE/TIME, STATUS]
 	- table will show up to 20 rows
+
+- Add a blue button with "Select" to select this incident.  Selecting incident will: 
+	- in the javascript, save the incident json to a variable 
+
+
+
+

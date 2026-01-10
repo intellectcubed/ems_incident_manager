@@ -273,7 +273,11 @@ function viewIncidentDetails(incidentNumber, unitId) {
 function formatDateTime(dateString) {
     if (!dateString) return 'N/A';
 
-    const date = new Date(dateString);
+    // Remove 'Z' or timezone info and replace 'T' with space
+    // This forces JavaScript to interpret the date as local time instead of UTC
+    let cleanedDate = dateString.replace('T', ' ').replace('Z', '').split('.')[0];
+
+    const date = new Date(cleanedDate);
     const dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
