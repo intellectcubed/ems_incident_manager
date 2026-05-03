@@ -70,6 +70,11 @@ function displayIncidentDetails(incident) {
     document.getElementById('address').textContent = incident.location || 'N/A';
     document.getElementById('incidentType').textContent = incident.incident_type || 'N/A';
 
+    // Enable download button if PDF is available
+    if (incident.pdf_url) {
+        document.getElementById('downloadButton').disabled = false;
+    }
+
     // Parse and display timeline
     displayTimeline(incident.content);
 }
@@ -152,5 +157,17 @@ function parseDateTimeForSort(dateStr, timeStr) {
     const [hours, minutes, seconds] = timeStr.split(':');
 
     return new Date(year, month - 1, day, hours, minutes, seconds);
+}
+
+/**
+ * Download the incident PDF to the local machine
+ */
+function downloadPdf() {
+    if (!currentIncident?.pdf_url) return;
+
+    const a = document.createElement('a');
+    a.href = currentIncident.pdf_url;
+    a.download = `incident-${currentIncident.incident_number}.pdf`;
+    a.click();
 }
 

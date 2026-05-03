@@ -410,6 +410,9 @@ p, label, input, button {
 
 .details-header {
   margin-bottom: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .details-header h1 {
