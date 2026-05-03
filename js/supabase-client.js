@@ -99,10 +99,10 @@ async function getRecentIncidents(page = 1, limit = 20) {
  */
 async function getIncidentsByDate(date, page = 1, limit = 20) {
     const offset = (page - 1) * limit;
-    // Parse as local midnight to avoid the UTC-midnight offset shifting the day boundary
-    const [year, month, day] = date.split('-').map(Number);
-    const startDate = new Date(year, month - 1, day, 0, 0, 0);
-    const endDate = new Date(year, month - 1, day + 1, 0, 0, 0);
+    // Data is stored as local time labeled UTC, so UTC midnight aligns with the local day boundary.
+    const startDate = new Date(date);
+    const endDate = new Date(date);
+    endDate.setDate(endDate.getDate() + 1);
 
     const { data, error, count } = await supabaseClient
         .from('rip_and_runs')

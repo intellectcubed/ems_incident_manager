@@ -273,7 +273,10 @@ function viewIncidentDetails(incidentNumber, unitId) {
 function formatDateTime(dateString) {
     if (!dateString) return 'N/A';
 
-    const date = new Date(dateString);
+    // Timestamps are stored as local time but labeled UTC (e.g. +00:00).
+    // Strip the timezone suffix so JS treats the value as local time, not UTC.
+    const cleanedDate = dateString.replace('T', ' ').replace(/(\.\d+)?(Z|[+-]\d{2}:\d{2})$/, '');
+    const date = new Date(cleanedDate);
     const dateOptions = { month: '2-digit', day: '2-digit', year: 'numeric' };
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
 
