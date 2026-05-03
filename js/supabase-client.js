@@ -70,16 +70,6 @@ async function isAuthenticated() {
 }
 
 /**
- * Format a Date as a local-time ISO string (no Z suffix) to match how
- * timestamps are stored in the DB (local time, not UTC).
- */
-function toLocalISOString(date) {
-    const pad = n => String(n).padStart(2, '0');
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
-           `T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-}
-
-/**
  * Query incidents from the past 7 days with pagination
  * @param {number} page - Page number (1-indexed)
  * @param {number} limit - Number of results per page (default: 20)
@@ -93,7 +83,7 @@ async function getRecentIncidents(page = 1, limit = 20) {
     const { data, error, count } = await supabaseClient
         .from('rip_and_runs')
         .select('*', { count: 'exact' })
-        .gt('incident_date', toLocalISOString(sevenDaysAgo))
+        .gt('incident_date', sevenDaysAgo.toISOString())
         .order('incident_date', { ascending: false })
         .range(offset, offset + limit - 1);
 
@@ -109,16 +99,16 @@ async function getRecentIncidents(page = 1, limit = 20) {
  */
 async function getIncidentsByDate(date, page = 1, limit = 20) {
     const offset = (page - 1) * limit;
+    // Parse as local midnight to avoid the UTC-midnight offset shifting the day boundary
     const [year, month, day] = date.split('-').map(Number);
-    const nextDay = new Date(year, month - 1, day + 1);
-    const pad = n => String(n).padStart(2, '0');
-    const nextDayStr = `${nextDay.getFullYear()}-${pad(nextDay.getMonth() + 1)}-${pad(nextDay.getDate())}`;
+    const startDate = new Date(year, month - 1, day, 0, 0, 0);
+    const endDate = new Date(year, month - 1, day + 1, 0, 0, 0);
 
     const { data, error, count } = await supabaseClient
         .from('rip_and_runs')
         .select('*', { count: 'exact' })
-        .gte('incident_date', `${date}T00:00:00`)
-        .lt('incident_date', `${nextDayStr}T00:00:00`)
+        .gte('incident_date', startDate.toISOString())
+        .lt('incident_date', endDate.toISOString())
         .order('incident_date', { ascending: false })
         .range(offset, offset + limit - 1);
 
